@@ -40,5 +40,9 @@ def evaluate_main(templatename, templatevariables={}, request=None):
 
 	templatevariables['main_base_url'] = str(options.url_path('base_url_submin'))
 	templatevariables['session_user'] = session_user
+	templatevariables['users_exp_col'] = request.getCookie('usersExpCol', 'collapsed')
+	templatevariables['groups_exp_col'] = request.getCookie('groupsExpCol', 'collapsed')
+	templatevariables['repositories_exp_col'] = request.getCookie('repositoriesExpCol', 'collapsed')
+	templatevariables['enabled_external'] = options.value('enabled_external', 'no') != 'no'
 
 	return evaluate('main.html', templatevariables)

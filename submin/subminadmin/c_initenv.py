@@ -244,7 +244,7 @@ default might work in some places, but not all.
 
 			(key, val) = arg.split('=', 1)
 			if key not in self.defaults:
-				print "\nSorry, I don't understand `%s':\n" % key
+				print "\nSorry, I don't understand '%s':\n" % key
 				self.sa.execute(['help', 'initenv'])
 				return False
 

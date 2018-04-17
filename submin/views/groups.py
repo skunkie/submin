@@ -2,8 +2,7 @@ from submin.dispatch.view import View
 from submin.template.shortcuts import evaluate_main
 from submin.dispatch.response import Response, XMLStatusResponse, XMLTemplateResponse
 from submin.views.error import ErrorResponse
-from submin.models import user
-from submin.models import group
+from submin.models import group, permissions, user
 from submin.models.exceptions import GroupExistsError, MemberExistsError
 from submin.models.exceptions import UnknownGroupError
 from submin.auth.decorators import *
@@ -52,6 +51,8 @@ class Groups(View):
 			return ErrorResponse('Not permitted', request=req)
 
 		localvars['group'] = g
+		p = list(permissions.list_by_group(g.name))
+		localvars['permissions'] = p
 		formatted = evaluate_main('groups.html', localvars, request=req)
 		return Response(formatted)
 
@@ -70,7 +71,7 @@ class Groups(View):
 		if req.post and req.post['groupname']:
 			import re
 
-			groupname = req.post.get('groupname').strip()
+			groupname = req.post.get('groupname').strip().lower()
 			if re.findall('[^a-zA-Z0-9_-]', groupname):
 				return self.showAddForm(req, groupname, 'Invalid characters in groupname')
 			if groupname == '':

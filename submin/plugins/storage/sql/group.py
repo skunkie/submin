@@ -1,6 +1,6 @@
 import sqlite3
 import submin.plugins.storage.sql.common as storage
-from submin.models.exceptions import GroupExistsError, MemberExistsError
+from submin.models.exceptions import GroupExistsError, MemberExistsError, UnknownGroupError
 
 def row_dict(cursor, row):
 	# description returns a tuple; the first entry is the name of the field
@@ -26,7 +26,16 @@ def add(groupname):
 		storage.execute(storage.db.cursor(), \
 			"INSERT INTO groups (name) VALUES (?)", (groupname,))
 	except storage.SQLIntegrityError as e:
-		raise GroupExistsError("Group `%s' already exists" % groupname)
+		raise GroupExistsError("Group '%s' already exists" % groupname)
+
+def rename(oldgroupname, newgroupname):
+	if not group_data(oldgroupname):
+		raise UnknownGroupError("Group '%s' does not exist" % oldgroupname)
+	try:
+		storage.execute(storage.db.cursor(), \
+			"UPDATE groups SET name=? WHERE name=?", (newgroupname, oldgroupname))
+	except storage.SQLIntegrityError as e:
+		raise GroupExistsError("Group '%s' already exists" % newgroupname)
 
 def group_data(groupname):
 	cur = storage.db.cursor()

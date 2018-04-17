@@ -7,6 +7,7 @@ hooks = {
 	'group-add-member': [export_notifications],
 	'group-delete-member': [export_notifications],
 	'group-delete': [export_notifications],
+	'group-rename': [export_notifications],
 	'repository-delete': [export_notifications],
 	'repository-notifications-update': [export_notifications],
 	'permission-update': [export_notifications]

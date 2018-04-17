@@ -1,4 +1,5 @@
 from submin import models
+from submin.auth.external import LDAPGroup
 from submin.hooks.common import trigger_hook
 from submin.models import options
 from submin.models import repository
@@ -50,6 +51,11 @@ def add(username, email, password=None, send_mail=True, origin=None):
 
 	return u
 
+def check_membership(username, password):
+	"""Returns True if a user is a member of the LDAP group"""
+	group = LDAPGroup(username, password)
+	return username in group.members
+
 class User(object):
 	def __init__(self, username=None, raw_data=None):
 		"""Constructor, either takes a username or raw data
@@ -89,7 +95,12 @@ class User(object):
 
 	def check_password(self, password):
 		"""Return True if password is correct, can raise NoMD5PasswordError"""
-		return storage.check_password(self._id, password)
+		authenticated = False
+		if options.value('enabled_external', 'no') != 'no':
+			authenticated = check_membership(self._name, password)
+		if not authenticated:
+			authenticated = storage.check_password(self._id, password)
+		return authenticated
 
 	def set_password(self, password, send_email=False):
 		storage.set_password(self._id, password)
@@ -287,11 +298,19 @@ class User(object):
 		self._is_admin = is_admin
 		storage.set_is_admin(self._id, is_admin)
 
+	def _getIsExternal(self):
+		"""Returns True if a user is configured with external authentication"""
+		if options.value('enabled_external', 'no') != 'no':
+			group = LDAPGroup(options.value('external_passwd'), options.value('external_user'))
+			return self._name in group.members
+		return False
+
 	id       = property(_getId)   # id is read-only
 	name     = property(_getName,     _setName)
 	email    = property(_getEmail,    _setEmail)
 	fullname = property(_getFullname, _setFullname)
 	is_admin = property(_getIsAdmin,  _setIsAdmin)
+	is_external = property(_getIsExternal)
 
 __doc__ = """
 Storage contract

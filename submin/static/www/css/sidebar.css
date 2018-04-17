@@ -1,6 +1,6 @@
 #sidebar {
 	background-color: #dadfe6;
-	width: 161px;
+	width: 299px;
 	padding: 0px;
 	margin: 0px;
 	float: left;
@@ -108,7 +108,7 @@ ul#addicons {
 	height: 30px;
 	margin: 0;
 	padding: 0;
-	width: 161px; /* not 162px, let the border show! */
+	width: 299px; /* not 300px, let the border show! */
 	border-top: 1px solid #515151;
 	border-right: 1px solid #515151;
 }
@@ -139,3 +139,10 @@ ul#addicons li a div.sb_group { background-position: -40px 0px; }
 ul#addicons li a div.sb_group.pressed { background-position: -40px -30px; }
 ul#addicons li a div.sb_repos  { background-position: -80px 0px; }
 ul#addicons li a div.sb_repos.pressed { background-position: -80px -30px; }
+
+#sync {
+	width: 25px;
+	height: 25px;
+	padding-top: 2px;
+	opacity: 0.85;
+}

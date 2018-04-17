@@ -184,6 +184,9 @@ function collapsables_collapse(prefix, triggered, collapse)
 	} else {
 		collapsee.style.display = 'block';
 	}
+	if (collapsee.id)
+		document.cookie =
+			collapsee.id + 'ExpCol = ' + ['expanded', 'collapsed'][collapse ? 1 : 0] + '; path=/';
 	// force refresh on certain browsers This is needed for the repositories
 	// edit box (Safari, ff, ??)
 	var root = collapsables_getRoot(prefix, triggered);

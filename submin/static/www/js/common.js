@@ -547,3 +547,75 @@ function lightbox_hide(el, close_el, handler) {
 	removeEvent(document, 'keydown', handler);
 	removeEvent(close_el, 'click', handler);
 }
+
+var ru_lat = {
+	// ГОСТ Р 52535.1-2006
+	"а":"a",
+	"б":"b",
+	"в":"v",
+	"г":"g",
+	"д":"d",
+	"е":"e",
+	"ё":"e",
+	"ж":"zh",
+	"з":"z",
+	"и":"i",
+	"й":"i",
+	"к":"k",
+	"л":"l",
+	"м":"m",
+	"н":"n",
+	"о":"o",
+	"п":"p",
+	"р":"r",
+	"с":"s",
+	"т":"t",
+	"у":"u",
+	"ф":"f",
+	"х":"kh",
+	"ц":"tc",
+	"ч":"ch",
+	"ш":"sh",
+	"щ":"shch",
+	"ы":"y",
+	"э":"e",
+	"ю":"iu",
+	"я":"ia",
+	"А":"A",
+	"Б":"B",
+	"В":"V",
+	"Г":"G",
+	"Д":"D",
+	"Е":"E",
+	"Ё":"E",
+	"Ж":"ZH",
+	"З":"Z",
+	"И":"I",
+	"Й":"I",
+	"К":"K",
+	"Л":"L",
+	"М":"M",
+	"Н":"N",
+	"О":"O",
+	"П":"P",
+	"Р":"R",
+	"С":"S",
+	"Т":"T",
+	"У":"U",
+	"Ф":"F",
+	"Х":"KH",
+	"Ц":"TC",
+	"Ч":"CH",
+	"Ш":"SH",
+	"Щ":"SHCH",
+	"Ы":"Y",
+	"Э":"E",
+	"Ю":"IU",
+	"Я":"IA"
+};
+
+function translit(str, rule) {
+	return str.split('').map(function(char) {
+		return rule[char] || char;
+	}).join("");
+}

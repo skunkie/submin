@@ -6,8 +6,7 @@ from submin.dispatch.response import XMLTemplateResponse
 from submin.auth.decorators import acl_required, Unauthorized
 from submin.common.execute import check_output
 from submin.models.hookjobs import jobs, done as job_done
-from submin.models import trac
-from submin.models import options, repository
+from submin.models import options, repository, trac
 
 class Hooks(View):
 	def handler(self, req, path):
@@ -105,4 +104,3 @@ class Hooks(View):
 					return 'trac-admin %s: %s' % (' '.join(args), output)
 
 		return []
-

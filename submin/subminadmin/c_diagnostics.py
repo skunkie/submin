@@ -17,7 +17,7 @@ Usage:
 	def run(self):
 		from submin.models import options
 		from submin.template.shortcuts import evaluate
-		from submin.diagnostics import trac, git, svn, email
+		from submin.diagnostics import email, external, git, svn, trac
 
 		localvars = {}
 
@@ -35,6 +35,8 @@ Usage:
 			diagnostics.update(svn.diagnostics())
 		if which in ('all', 'trac'):
 			diagnostics.update(trac.diagnostics())
+		if which in ('all', 'external'):
+			diagnostics.update(external.diagnostics())
 		localvars['diag'] = diagnostics
 		localvars['subminenv'] = options.env_path()
 

@@ -1,6 +1,22 @@
 To get more information on tickets (#nnn in text below), see the following URL:
 https://ssl.supermind.nl/collab/projects/submin/report/6
 
+Changes in modified version:
+ - external authentication using ldap, mixed with local users,
+ - synchronization for external authentication,
+ - ldap support for Trac, fix creation of Trac environment,
+ - default banner to Trac environment, fix missing repository_dir in trac.ini,
+ - automatic creation of groups like repo_branch_ro and repo_branch_rw for path repo/branch,
+ - transliteration for cyrillic paths when creating groups automatically,
+ - cookies for sidebar expandable-collapsable elements,
+ - fix rendering font Helvetica in Windows 10,
+ - link to added groups and users in permission-editor,
+ - fix displaying repo name on repo page,
+ - table showing permissions per user and per group,
+ - Python shell to submin2-admin,
+ - renaming groupnames,
+ - script to make groupnames consistent.
+
 Changes in 2.2.2:
  - packaging according to dh_python (fixes #367)
 

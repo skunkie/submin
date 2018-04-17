@@ -8,6 +8,7 @@
 			<tr><td><a href="#git">Git</a></td><td><span class="diag_[val diag.git_all_label]"></span></td></tr>
 			<tr><td><a href="#svn">Subversion</a></td><td><span class="diag_[val diag.svn_all_label]"></span></td></tr>
 			<tr><td><a href="#trac">Trac</a></td><td><span class="diag_[val diag.trac_all_label]"></span></td></tr>
+			<tr><td><a href="#external">External Authentication</a></td><td><span class="diag_[val diag.external_all_label]"></span></td></tr>
 		</table>
 		<div>
 			<a name="email"><h3 class="diag">Email support correctly configured: <span class="diag_[val diag.email_all_label]"></span></h3></a>
@@ -382,6 +383,65 @@
 						</div>]
 					</div>
 				</li>
+				]
+			</ul>
+			<a name="external"><h3 class="diag">External authentication support working correctly: <span class="diag_[val diag.external_all_label]"></span></h3></a>
+			<ul>
+				<li>
+					<div class="diag_result">
+						<label class="diag">External authentication enabled</label>
+						<span class="diag_[val diag.enabled_external_label]"></span>
+						<div class="diag_note">
+							[test:diag.enabled_external To disable, run the following command: <span class="diag_cmd">submin2-admin [val subminenv] config set enabled_external no</span>]
+							[else To enable, run the following command: <span class="diag_cmd">submin2-admin [val subminenv] config set enabled_external yes</span>]
+						</div>
+					</div>
+				</li>
+				[test:diag.enabled_external
+				[test:!diag.external_apache_modules_exec_ok
+				<li>
+					<div class="diag_result">
+						<label class="diag">Apache modules</label>
+						<span class="diag_fail"></span>
+						<div class="diag_note">
+							<p>Could not execute apachectl or load the server-info URL to test if modules are loaded. Error message was:</p>
+							<div class="diag_pre">[val diag.external_apache_modules_errmsg]</div>
+							<p>If the above commands all fail with 'No such file or directory', then maybe the 'apachectl' binary is named differently on your system. Please report this as a bug.</p>
+
+							<p>If the above commands can be found, but fail to verify because 'apachectl' complains about lack of permissions, you can make sure that the apache module 'info'
+							is loaded and reachable from localhost. Submin will then try to get the list of modules from the 'info' modules by retrieving a URL.</p>
+
+							<p>By default, this URL is 'http://localhost/server-info?list', but if you need to change it for some reason, you can do so with the following command:
+							<span class="diag_cmd">submin2-admin [val subminenv] config set apache_server_info_url "http://localhost/server-info?list"</span></p>
+
+							<p>If the 'internal URL get' fails this URL could not be used, please check the error message there and try to correct the error.</p>
+						</div>
+					</div>
+				</li>
+				][else
+				[iter:diag.external_apache_modules
+				<li>
+					<div class="diag_result">
+						<label class="diag">Apache module '[ikey]'</label>
+						<span class="diag_[test:ival ok][else fail]"></span>
+						[test:!ival
+						<div class="diag_note">
+							The module '[ikey]' was not loaded. Please make sure it is.
+						</div>]
+					</div>
+				</li>]
+				]
+				[iter:diag.external_settings
+				<li>
+					<div class="diag_result">
+						<label class="diag">Setting '[ikey]'</label>
+						<span class="diag_[test:ival.0 ok][else fail]"></span>
+						[test:!ival.0
+						<div class="diag_note">
+							To set '[ikey]', run the following command: <span class="diag_cmd">submin2-admin [val subminenv] config set [ikey] [ival.1]</span>
+						</div>]
+					</div>
+				</li>]
 				]
 			</ul>
 		</div>

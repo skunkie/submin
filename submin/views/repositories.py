@@ -10,7 +10,7 @@ from submin.models import repository
 from submin.models.repository import Repository, DoesNotExistError, PermissionError
 from submin.models import trac
 from submin.models import options
-from submin.models.exceptions import MissingConfig
+from submin.models.exceptions import MissingConfig, UnknownGroupError
 from submin.models.repository import vcs_list
 from submin.auth.decorators import login_required, admin_required
 from submin.path.path import Path
@@ -181,6 +181,16 @@ class Repositories(View):
 				default_perm = "w"
 			else:
 				default_perm = "r"
+
+		if type == 'group':
+			name = name.lower()
+			try:
+				group.Group(name)
+			except UnknownGroupError as e:
+				import re
+				if re.findall('[^a-zA-Z0-9_-]', name):
+					return XMLStatusResponse('addPermission', False, 'Invalid characters in groupname %s' % name)
+				group.add(name)
 
 		permissions.add(repos.name, repos.vcs_type, path, name,
 				type, default_perm)

@@ -11,6 +11,9 @@ def list_by_path(repos, vcs_type, path):
 def list_by_user(username):
 	return storage.list_permissions_by_user(username)
 
+def list_by_group(groupname):
+	return storage.list_permissions_by_group(groupname)
+
 def list_readable_user_paths(repository, vcs_type, user):
 	"""Return a list of paths for this *repository* that the *user* is
 	   able to read. The *user* is a User object."""
@@ -107,6 +110,9 @@ Storage Contract
 * list_permissions_by_user(username)
 	Get all permissions for a specific user, including permissions that groups have that
 	this user is a member of.
+
+* list_permissions_by_group(groupname)
+	Get all permissions for a specific group.
 
 * add_permission(repos, repostype, path, subject, subjecttype, perm)
 	Set the permission of *repos*:*path* to *subject* (user, group, all)

@@ -15,9 +15,11 @@ Usage:
 		self.argv = argv
 		os.environ['SUBMIN_ENV'] = self.sa.env
 
-	def read_ini(self, filename):
+	def read_ini(self, filename, case_sensitive=False):
 		import ConfigParser
 		cp = ConfigParser.ConfigParser()
+		if case_sensitive:
+			cp.optionxform = str
 		cp.read(filename)
 		return cp
 
@@ -137,7 +139,7 @@ Usage:
 		authz_file = config.get('svn', 'authz_file')
 
 		# read file
-		cp = self.read_ini(authz_file)
+		cp = self.read_ini(authz_file, True)
 
 		from submin.models.repository import DoesNotExistError
 
@@ -155,7 +157,7 @@ Usage:
 				permission = cp.get(section, name)
 				if name[0] == '@':
 					name_type = 'group'
-					name = name[1:]
+					name = name[1:].lower()
 				elif name == '*':
 					name_type = 'all'
 				else:

@@ -177,3 +177,12 @@ function deleteObject()
 		LogResponse(response);
 	}
 }
+
+function ExternalSync() {
+	AjaxAsyncPostRequest(document.location, "external_sync", ExternalSyncCB);
+}
+
+function ExternalSyncCB(response) {
+	LogResponse(response);
+	sidebar_reload("users");
+}

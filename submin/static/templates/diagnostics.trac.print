@@ -91,8 +91,8 @@ Trac support working correctly: [val diag.trac_all_label]
 
       The trac.ini file is: "[val diag.trac_dir]/[ival.trac_env]/conf/trac.ini"
 ]
-
    Options from the 'components' section can be enabled in its Trac admin panel
    (Trac may ask you to login first). Other options have to be configured in
    the trac.ini of the corresponding trac environment.]
+
 ]

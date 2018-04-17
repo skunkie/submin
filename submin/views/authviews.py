@@ -18,6 +18,8 @@ class Login(View):
 				return self.evaluate_form(session=request.session)
 			username = request.post.get('username', '')
 			password = request.post.get('password', '')
+			if '' in (username, password):
+				return self.evaluate_form(session=request.session)
 
 		invalid_login = True
 		u = None
@@ -113,8 +115,11 @@ class Password(View):
 		if username:
 			try:
 				u = user.User(username)
-				u.prepare_password_reset(req.remote_address)
-				templatevars['sent'] = True
+				if u.is_external:
+					templatevars['external'] = True
+				else:
+					u.prepare_password_reset(req.remote_address)
+					templatevars['sent'] = True
 			except UnknownUserError:
 				templatevars['sent'] = True
 		else:
@@ -130,4 +135,3 @@ class Logout(View):
 		request.session.clear()
 		url = options.url_path('base_url_submin')
 		return Redirect(url, request)
-

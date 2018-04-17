@@ -49,7 +49,7 @@ function resize_content_div()
 	if (!content)
 		return;
 
-	var width = WindowWidth() - 200;
+	var width = WindowWidth() - 338;
 	content.style.width = width + 'px';
 
 	var repostree = document.getElementById('repostree');
@@ -218,18 +218,35 @@ function loadPermissions(path)
 	var users_length = users.length;
 	for (var idx = 0; idx < users_length; ++idx) {
 		addable[addable.length] =
-			{'type': 'user', 'name': users[idx].getAttribute('name')};
+			{'type': 'user', 'name': users[idx].getAttribute('name'), 'top': 1};
 	}
+
+	// prepare names for RO and RW groups
+	var re = /[^a-zA-Z0-9\-\/]/g; // filter out characters not allowed in groupnames
+	var repository_name = permissions.getAttribute('repository');
+	if (path != '/')
+		path += '/';
+	var path_group_pattern = repository_name + translit(path, ru_lat).replace(re, '').replace(/\//g, '_');
+	var path_groups = [path_group_pattern + 'ro', path_group_pattern + 'rw'];
 
 	// process groups
 	var groups = repositoryperms.xml.getElementsByTagName('group');
+	var groupnames = [];
 	var groups_length = groups.length;
 	for (var idx = 0; idx < groups_length; ++idx) {
+		var groupname = groups[idx].getAttribute('name');
+		groupnames.push(groupname);
 		addable[addable.length] =
-			{'type': 'group', 'name': groups[idx].getAttribute('name')};
+			{'type': 'group', 'name': groupname, 'top': 1};
 	}
 
-	addable[addable.length] = {'type': 'user', 'name': '*'}; // for all users
+	// add RO and RW groups to addable
+	for (var idx = 0; idx < path_groups.length; ++idx) {
+		if (groupnames.indexOf(path_groups[idx].toLowerCase()) < 0)
+			addable.push({'type': 'group', 'name': path_groups[idx], 'top': 0});
+	}
+	
+	addable[addable.length] = {'type': 'user', 'name': '*', 'top': 1}; // for all users
 
 	// process permissions
 	var perms = repositoryperms.xml.getElementsByTagName('member');

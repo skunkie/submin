@@ -38,6 +38,19 @@ def create(vcs_type, reposname, adminUser):
 		admin_command(tracenv,
 			['config', 'set', 'components', component, 'enabled'])
 
+	admin_command(tracenv, ['config', 'set', 'header_logo', 'alt', 'Trac'])
+	admin_command(tracenv, ['config', 'set', 'header_logo', 'height', '61'])
+	admin_command(tracenv, ['config', 'set', 'header_logo', 'link', "%s/%s" % (options.value('base_url_trac'), reposname)])
+	admin_command(tracenv, ['config', 'set', 'header_logo', 'src', 'trac_banner.png'])
+	admin_command(tracenv, ['config', 'set', 'header_logo', 'width', '214'])
+	admin_command(tracenv, ['config', 'set', 'project', 'descr', 'Repository %s' % reposname])
+	admin_command(tracenv, ['config', 'set', 'svn', 'authz_file', options.env_path('svn_authz_file')])
+	admin_command(tracenv, ['config', 'set', 'svn', 'authz_module_name', reposname])
+	admin_command(tracenv, ['config', 'set', 'trac', 'authz_file', options.env_path('svn_authz_file')])
+	permission_policies = admin_command(tracenv, ['config', 'get', 'trac', 'permission_policies'])
+	admin_command(tracenv, ['config', 'set', 'trac', 'permission_policies', 'AuthzSourcePolicy,' + permission_policies])
+	admin_command(tracenv, ['config', 'set', 'trac', 'repository_dir', vcsdir])
+
 def admin_command(trac_dir, args):
 	"""trac_dir is the trac env dir, args is a list of arguments to trac-admin"""
 	cmd = ['trac-admin', trac_dir]

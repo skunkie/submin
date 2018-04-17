@@ -2,13 +2,10 @@ from submin.dispatch.view import View
 from submin.template.shortcuts import evaluate_main
 from submin.dispatch.response import Response, XMLStatusResponse, XMLTemplateResponse
 from submin.views.error import ErrorResponse
-from submin.models import user
+from submin.models import group, permissions, options, user, validators
 from submin.models.exceptions import UnknownUserError, UserExistsError, \
 		UserPermissionError, MemberExistsError
-from submin.models import group
 from submin.auth.decorators import *
-from submin.models import options
-from submin.models import validators
 
 class Users(View):
 	@login_required
@@ -53,7 +50,10 @@ class Users(View):
 		if 'change_password_hint' in req.session:
 			localvars['change_password_hint'] = True
 
+		p = list(permissions.list_by_user(u.name))
+		localvars['permissions'] = p
 		localvars['enabled_git'] = 'git' in options.value('vcs_plugins', '')
+		localvars['external'] = u.is_external
 
 		formatted = evaluate_main('users.html', localvars, request=req)
 		return Response(formatted)

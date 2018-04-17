@@ -18,6 +18,12 @@ def add(name):
 	trigger_hook('group-create', groupname=name)
 	return Group(name)
 
+def rename(oldname, newname):
+	"""Rename an existing group"""
+	storage.rename(oldname, newname)
+	trigger_hook('group-rename', groupname=newname)
+	return Group(newname)
+
 class Group(object):
 	def __init__(self, groupname=None, raw_data=None):
 		"""Constructor, either takes a groupname or raw data
@@ -80,6 +86,11 @@ Username is unique and primary key.
 * add(groupname)
 	Adds a new group, raises `GroupExistsError` if there already is a group
 	with this groupname
+
+* rename(oldgroupname, newgroupname)
+	Renames an existing group, raises 'UnknownGroupError' if there is no group
+	with this oldgroupname, raises `GroupExistsError` if there already is a group
+	with this newgroupname
 
 * group_data(groupname)
 	Returns a dictionary with all required group data.

@@ -144,6 +144,13 @@ Usage:
 			'svn_dir': options.env_path('svn_dir'),
 			'trac_dir': options.env_path('trac_dir'),
 			'authz_file': options.env_path('svn_authz_file'),
+			'enabled_external': options.value('enabled_external', 'no') != 'no',
+			'external_server': options.value('external_server'),
+			'external_base_dn': options.value('external_base_dn'),
+			'external_group_dn': options.value('external_group_dn'),
+			'external_user': options.value('external_user'),
+			'external_passwd': options.value('external_passwd'),
+			'external_upn_suffix': options.value('external_upn_suffix'),
 		}
 		self.auth_type = options.value('auth_type')
 

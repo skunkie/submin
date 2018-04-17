@@ -2,6 +2,7 @@ import time
 
 from submin.dispatch.response import Response, HTTP404, XMLStatusResponse
 
+from submin.auth.external import external_sync
 from submin.views.error import ErrorResponse
 from submin.views.users import Users
 from submin.views.groups import Groups
@@ -54,6 +55,13 @@ def dispatcher(request):
 		cls = tupl[0](request, tupl[1])
 		if not hasattr(cls, handlerName):
 			raise Exception("No handler %r found for view %r" % (handlerName, path[0].lower()))
+
+		if 'user' in request.session and request.session['user']['is_admin'] and 'external_sync' in request.post:
+			result = external_sync()
+			errors = '\n'.join(x for x in result.get('errormsgs', ''))
+			response = XMLStatusResponse('external_sync', result.get('success', False),
+				errors if errors else 'Successful synchronization')
+			return response
 
 		del path[0]
 		handler = getattr(cls, handlerName)

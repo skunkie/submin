@@ -1,0 +1,6 @@
+Synchronization success: [val success]
+[@test:errormsgs
+Errors:
+[@iter:errormsgs
+ * [ival msg]
+]]

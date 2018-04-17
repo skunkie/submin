@@ -1,4 +1,5 @@
 import submin.plugins.storage.sql.common as storage
+from crypt import crypt
 from submin.models.exceptions import UserExistsError, NoMD5PasswordError
 from submin.auth import md5crypt
 
@@ -41,7 +42,7 @@ def add(username, password):
 		storage.execute(cur, "INSERT INTO users (name, password) VALUES (?, ?)",
 				(username, password))
 	except storage.SQLIntegrityError as e:
-		raise UserExistsError("User `%s' already exists" % username)
+		raise UserExistsError("User '%s' already exists" % username)
 
 def check_password(userid, password):
 	cur = storage.db.cursor()
@@ -49,7 +50,7 @@ def check_password(userid, password):
 	row = cur.fetchone()
 	vals = row[0][1:].split('$')
 	if not len(vals) == 3:
-		raise NoMD5PasswordError
+		return row[0] == crypt(password, row[0][:2])
 	magic, salt, encrypted = vals
 	return _pw_hash(password, salt, magic) == row[0]
 

@@ -76,6 +76,9 @@ Selector.prototype.init = function() {
 		var addable = callbackValue["addable"];
 		if (this.options.type == "permissions") {
 			addable.sort(permissionSort);
+			addable.sort(function topSort(a, b) {
+				return a.top - b.top;
+			});
 		} else {
 			addable.sort(stringSort);
 		}
@@ -132,9 +135,11 @@ Selector.prototype.setupAddedItem = function(added) {
 			var img = $c("img",
 					{"src": base_url + "img/" + icons[added["type"]]});
 			var displayname = added["name"];
+			var link = $c("a", {"href": base_url + added["type"] + "s/show/" + displayname});
+			link.appendChild(document.createTextNode(displayname));
 			var span = $c("span");
 			span.appendChild(img);
-			span.appendChild(document.createTextNode(displayname));
+			span.appendChild(link);
 			item.appendChild(span);
 		} else {
 			item.name = added;

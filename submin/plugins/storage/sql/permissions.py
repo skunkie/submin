@@ -13,10 +13,31 @@ def list_paths(repository, repostype):
 def list_permissions_by_user(username):
 	cur = storage.db.cursor()
 	userid = _subject_to_id(username, 'user')
-	storage.execute(cur, """SELECT p.repository, p.repositorytype, p.path, p.type  FROM permissions AS p
+	storage.execute(cur, """SELECT p.repository, p.repositorytype, p.path, p.type, g.name FROM permissions AS p
 		LEFT JOIN group_members AS gm ON p.subjectid=gm.groupid
+		LEFT JOIN groups AS g on gm.groupid = g.id
 		WHERE (subjecttype = 'group' AND gm.userid = ?) OR
-			(subjecttype = 'user' and p.subjectid = ?)""", (userid, userid))
+			(subjecttype = 'user' and p.subjectid = ?) ORDER BY p.repositorytype, p.repository, p.path""", (userid, userid))
+
+	rows = cur.fetchall()
+	if not rows:
+		return
+
+	for row in rows:
+		yield {
+			'repository': row[0],
+			'vcs': row[1],
+			'path': row[2],
+			'permission': row[3],
+			'group': row[4]
+		}
+
+def list_permissions_by_group(groupname):
+	cur = storage.db.cursor()
+	groupid = _subject_to_id(groupname, 'group')
+	storage.execute(cur, """SELECT p.repository, p.repositorytype, p.path, p.type FROM permissions AS p
+		LEFT JOIN groups AS g ON p.subjectid=g.id
+		WHERE p.subjecttype = 'group' AND g.id = ? ORDER BY p.repositorytype, p.repository, p.path""", (groupid, ))
 
 	rows = cur.fetchall()
 	if not rows:
