@@ -1,0 +1,337 @@
+body {
+	font-size: 12px;
+	font-family: "Lucida Grande", Helvetica, Verdana, Arial, Sans-serif;
+	margin: 0;
+	background: #fff;
+	color: #000;	
+}
+
+#content {
+	float: left;
+	position: fixed;
+	left: 162px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin-left: 1em;
+	padding-right: 1em;
+	overflow: auto;
+}
+
+ul { 
+	padding-left: 0em; 
+	margin: 0;
+}
+li { 
+	list-style: none;
+	padding-left: 1.5em;
+}
+a img { border: 0; }
+
+a { text-decoration: none; }
+
+a.external {
+	background:url(../img/external.png) 99% 40% no-repeat; padding-right: 15px;
+}
+
+#content h1 {
+	background: #ddd;
+	padding: 0.3em;
+	padding-left: 0.7em;
+	padding-right: 0.7em;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+#content h3 {
+	border-bottom: 1px solid #999;
+}
+
+.comment {
+	color: #666;
+	font-size: 9pt;
+	font-weight: normal;
+	font-style: italic;
+}
+
+img.adder, div.remover {
+	vertical-align: middle;
+}
+
+li form {
+	margin: 0.1em;
+}
+
+ul.selector {
+	padding-top: 1.0em;
+	padding-bottom: 1.5em;
+}
+
+ul.selector span {
+	float: left;
+}
+
+ul.selector li {
+	clear: both;
+}
+
+ul.selector li a {
+	width: 200px;
+	float: left;
+}
+
+ul.selector li select.adder {
+	width: 180px;
+	margin-right: 10px;
+	margin-bottom: 1.5em;
+	margin-left: 0.5em;
+	margin-top: -0.2em;
+	float: left;
+}
+
+ul.selector li .remover, ul.selector li .adder {
+	float: left;
+	cursor: pointer;
+}
+
+ul.selector li .adder {
+	padding-top: 2px;
+}
+
+div.error, div.hint {
+	border: 1px solid #666;
+	text-align: center;
+	padding: 1.5em 1em 1.5em 1em;
+	margin: 1em;
+}
+
+div.error {
+	background: #f66;
+}
+
+div.hint {
+	background: #FF6;
+}
+
+.hint_bg {
+	background: #FF6;
+}
+
+.required {
+	color: red;
+	margin: 0 0.6em;
+}
+
+input.rounded {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 2px solid #DDD;
+}
+
+/* ==== arrow CSS sprite ==== */
+div.c_icon {
+	height: 12px;
+	width: 12px;
+	float: left;
+	margin-right: 0.5em;
+	background: url('../img/icons.png');
+}
+
+div.c_icon.none { background: none; }
+div.c_icon.collapsed { background-position: 0px 0px; }
+div.c_icon.halfway { background-position: 0px -12px; }
+div.c_icon.expanded { background-position: 0px -24px; }
+div.c_icon.minus {
+	height: 13px;
+	width: 13px;
+	margin: 0px;
+	background-position: 0px -36px;
+}
+
+/* ==== Log popup ==== */
+#log {
+	border: 1px solid #666;
+	position: absolute;
+	left: 100px;
+	top: 10px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.log_error {
+	text-align: left;
+	width: 800px;
+	background: #f66;
+	padding: 1.5em;
+}
+
+.log_hint {
+	text-align: center;
+	width: 400px;
+	background: #ff6;
+	padding: 1.5em 0 1.5em 0;
+}
+
+.log_message {
+	text-align: center;
+	width: 400px;
+	background: #afa;
+	padding: 1.5em 0 1.5em 0;
+}
+
+#log small {
+	cursor: pointer;
+	color: #822;
+	float: right;
+	margin-right: 10px;
+	padding: 0 1em;
+	border: 1px solid #666;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.diag_ok {
+	background: #afa;
+	padding: 0 0.2em;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.diag_ok:before {
+	content: 'OK';
+}
+.diag_fail {
+	background: #f66;
+	padding: 0 0.2em;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.diag_fail:before {
+	content: 'Fail';
+}
+.diag_warn {
+	background: #fa6;
+	padding: 0 0.2em;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.diag_warn:before {
+	content: 'Warn';
+}
+.diag_disabled {
+	color: lightgray;
+	padding: 0 0.2em;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.diag_disabled:before {
+	content: 'Disabled';
+}
+
+
+.diag_inline {
+	float: right;
+	margin-left: 1em;
+}
+
+.diag_result {
+	margin: 0.5em;
+}
+.diag_result .diag_note {
+	padding: 0.5em;
+	margin: 0.5em 1em 1em 0.5em;
+	border: 1px solid whitesmoke;
+}
+.diag_pre {
+	white-space: pre;
+	font-family: monospace;
+	display: inline-block;
+	margin: 0.25em 0;
+	background-color: #fcfcfc;
+	border: 1px solid #f3f3f3;
+}
+div.diag_pre {
+	margin: 0.5em 0;
+	padding: 0.5em;
+}
+.diag_cmd {
+	font-family: monospace;
+	padding: 0 0.5em;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+
+table.toc tr td:first-child {
+	padding: 0 2em;
+}
+
+label.diag {
+	width: 20em;
+	float: left;
+	text-align: right;
+	padding: 0 0.5em;
+	background: #eee;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.hidden {
+	display: none;
+}
+
+.help_container {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	overflow: scroll;
+}
+.help_overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	background-color: black;
+	z-index: 1001;
+}
+
+.help_content {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	background: #ddd;
+	z-index: 1002;
+	box-shadow: 0px 0px 50px black;
+	padding: 1.5em;
+}
+
+.help_content li {
+	list-style: disc inside;
+}
+
+.help_close_button {
+	position: absolute;
+	right: 15px;
+	top: -15px;
+	padding: 0.2em 1em;
+	border: 3px solid white;
+	background-color: #C0CDED;
+	cursor: pointer;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	box-shadow: 0px -5px 20px #444;
+}

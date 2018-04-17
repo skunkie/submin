@@ -1,0 +1,80 @@
+Source: submin
+Section: web
+Priority: optional
+Maintainer: Michiel Holtkamp <submin@supermind.nl>
+Standards-Version: 3.6.1
+Build-Depends: dh-python, debhelper(>= 9), python
+# only for deb files: 2.7, for tarballs, we still support 2.6!
+X-Python-Version: >= 2.7
+
+Package: submin2
+Architecture: all
+Depends: submin2-full
+Description: Migration package for submin2-full
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ This package depends on submin2-full, this may not be what you want if you
+ only want either git or subversion support in submin2.
+
+Package: submin2-full
+Architecture: all
+Depends: submin2-core, submin2-svn, submin2-git, submin2-trac
+Description: submin2 full installation
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ This package depends on the core package and both subversion and git support.
+ By installing this package, you have all the dependencies you need for running
+ a full submin2 instance.
+
+Package: submin2-core
+Architecture: all
+Depends: nginx-full | apache2-mpm-prefork | apache2-mpm
+Suggests: uwsgi, uwsgi-plugin-python, python-uwsgidecorators, nginx-full, submin2-trac
+Conflicts: submin2 (<< 2.1.3)
+Description: A web admin interface for local svn/git repositories
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ Install either submin2-svn or submin2-git or both to install the dependencies
+ for the VCSes that you require.
+
+Package: submin2-svn
+Architecture: all
+Enhances: submin2-core
+Depends: submin2-core, python-subversion, apache2-mpm-prefork | apache2-mpm, libapache2-svn
+Description: Subversion support for submin2
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ This package depends on all the packages you need for subversion support in
+ submin2.
+
+Package: submin2-git
+Architecture: all
+Enhances: submin2-core
+Depends: submin2-core, git, openssh-client, openssh-server
+Description: Git support for submin2
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ This package depends on all the packages you need for git support in submin2.
+
+Package: submin2-trac
+Architecture: all
+Enhances: submin2-core
+Depends: submin2-core, trac
+Suggests: uwsgi, uwsgi-plugin-python, python-uwsgidecorators, nginx-full
+Description: Trac support for submin2
+ Submin provides a web-based admin interface to your svn and git repositories.
+ Features include: manage users/groups, manage path permissions, add
+ repositories.
+ .
+ This package depends on all the packages you need for trac support in submin2.
+

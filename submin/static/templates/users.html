@@ -1,0 +1,139 @@
+<div id="content">
+	<h1 class="content">User [val user.name]</h1>
+	<div class="settings">
+		<ul>
+			<li><form onSubmit="sendFullName();return false;"><label for="fullname">Name</label><input type="text" class="rounded" value="[val user.fullname]" id="fullname"/><input type="submit" value="save name" name="namebutton"/></form></li>
+			<li><form onSubmit="sendEmail();return false;"><label for="email">Email</label><input type="text" class="rounded" value="[val user.email]" id="email"/><input type="submit" value="save email" name="email"/> [test:session_user.is_admin <input type="button" name="reset_password" value="Send reset password email" onclick="sendSendPasswordMail(); return false" />]</form></li>
+			<li><form onSubmit=""><label for="password">Password</label><input type="password" class="rounded" id="password"/><input type="submit" value="save password" name="password" id="password_button"/></form>[test:change_password_hint <div id="change_password_hint" class="hint">Hint: don't forget to change your password!</div>]</li>
+			<li><label for="is_admin">Administrator</label><input [test:session_user.is_admin [equals:session_user.name:user.name disabled]][else disabled] [test:user.is_admin checked] type="checkbox" id="is_admin" /></li>
+		</ul>
+		<div class="usershowhide">
+			<h3 class="usershowhide c_trigger"><div class="usershowhide c_icon expanded"></div>Member of</h3>
+			<div class="usershowhide c_object">
+				<ul id="memberof" class="selector">
+				</ul>
+			</div>
+		</div>
+
+        [test:enabled_git
+		<div class="usershowhide">
+			<h3 class="usershowhide c_trigger">
+				<div class="usershowhide c_icon expanded"></div>SSH Keys
+			</h3>
+			<div class="usershowhide c_object">
+				<ul id="ssh_keys">
+				</ul>
+				<p><a href="" id="ssh_key_add_link">Add SSH Key</a></p>
+				<form onSubmit="addSSHKey(); return false;" style="display: none" id="ssh_key_add_form">
+					<ul>
+						<li><label for="title">Title</label>
+							<input type="text" value="" name="title" id="title"/>
+						</li>
+						<li><label for="ssh_key">SSH Key</label>
+							<textarea name="ssh_key" id="ssh_key" rows="10" cols="50"></textarea>
+							<div id="ssh_key_help_source" class="help">
+								Need more information about SSH keys?
+							</div>
+						</li>
+						<li><input type="submit" value="Add SSH Key" /></li>
+					</ul>
+				</form>
+				<div id="ssh_key_help_target" class="help_container">
+					<div class="help_overlay">
+					</div>
+					<div class="help_content">
+						<h3>OpenSSH format</h3>
+						<p>OpenSSH saves its public keys in
+						<code>~/.ssh</code> by default, with the extension
+						<code>.pub</code>. Typical names are
+						<code>id_dsa.pub</code> and <code>id_rsa.pub</code>.
+						</p>
+
+						<p>The contents of this file should look like the following:
+						<ul>
+							<li>it starts with 'ssh-rsa', 'ssh-dss', or similar</li>
+							<li>it is then followed by a long string of seemingly random characters</li>
+							<li>finally there is a comment field, usually in the format user@hostname.</li>
+						</ul>
+						</p>
+
+						<p>For example:</p>
+
+						<code>ssh-rsa AAAAB3...(characters omitted for brievity)...Urs+UziQh user@hostname</code>
+
+						<h3>RFC4716 style ssh key</h3>
+						<p>This type is automatically converted to OpenSSH key format. Example:</p>
+<code class="block">---- BEGIN SSH2 PUBLIC KEY ----
+AAAAB3NzaC1yc2EAAAADAQABAAABAQDAsZh0BINgeAUV/HfZGNwrCUH9VN7FP+ZdH6rbYC
+QuWUfD694TRqPTSQSJeJfAtx4R9HhfelSAxlMgwMc+vo/1mDBFpP3sW5pWNGS0BKfswZvn
+ycy6IlrKaAhwPHCEgUSIc77G4jlgGhNzfQEuHuzIIjNh73XyDixqGQ0fOgD/khFRlxCLuo
+Zt+2anP05KRd8E3zP+BEdPGON6xL3Z8FVRp5AN84eAhVmPssgqRbJqyFKFaaXXuJ7PyR/2
+ggr7+1psMxCvDF6mcXFBkDhGfcwF3RXRTJVMPeSUw4oPj6JL6v4h9HBQU+h45Urs+UziQh
+eVK+MJVdoNS6UNLT5nMj67
+---- END SSH2 PUBLIC KEY ----
+</code>
+
+						<h3>PKCS8 style ssh key</h3>
+						<p>This type is automatically converted to OpenSSH key format. Example:</p>
+<code class="block">-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwLGYdASDYHgFFfx32Rjc
+KwlB/VTexT/mXR+q22AkLllHw+veE0aj00kEiXiXwLceEfR4X3pUgMZTIMDHPr6P
+9ZgwRaT97FuaVjRktASn7MGb58nMuiJaymgIcDxwhIFEiHO+xuI5YBoTc30BLh7s
+yCIzYe918g4sahkNHzoA/5IRUZcQi7qGbftmpz9OSkXfBN8z/gRHTxjjesS92fBV
+UaeQDfOHgIVZj7LIKkWyashShWml17iez8kf9oIK+/tabDMQrwxepnFxQZA4Rn3M
+Bd0V0UyVTD3klMOKD4+iS+r+IfRwUFPoeOVK7PlM4kIXlSvjCVXaDUulDS0+ZzI+
+uwIDAQAB
+-----END PUBLIC KEY-----
+</code>
+
+						<h3>PEM style ssh key</h3>
+						<p>This type is automatically converted to OpenSSH key format. The comment field is optional. Example:</p>
+<code class="block">-----BEGIN RSA PUBLIC KEY-----
+Comment: "rsa-key-20140725"
+MIIBCgKCAQEAwLGYdASDYHgFFfx32RjcKwlB/VTexT/mXR+q22AkLllHw+veE0aj
+00kEiXiXwLceEfR4X3pUgMZTIMDHPr6P9ZgwRaT97FuaVjRktASn7MGb58nMuiJa
+ymgIcDxwhIFEiHO+xuI5YBoTc30BLh7syCIzYe918g4sahkNHzoA/5IRUZcQi7qG
+bftmpz9OSkXfBN8z/gRHTxjjesS92fBVUaeQDfOHgIVZj7LIKkWyashShWml17ie
+z8kf9oIK+/tabDMQrwxepnFxQZA4Rn3MBd0V0UyVTD3klMOKD4+iS+r+IfRwUFPo
+eOVK7PlM4kIXlSvjCVXaDUulDS0+ZzI+uwIDAQAB
+-----END RSA PUBLIC KEY-----
+</code>
+
+						<div id="ssh_key_help_close" class="help_close_button">Close or press ESC
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        ]
+
+		<div class="usershowhide">
+			<h3 class="usershowhide c_trigger">
+				<div class="usershowhide c_icon expanded"></div>Access to repositories
+			</h3>
+			<div class="usershowhide c_object">
+				<form onsubmit="return false;">
+				<table id="notifications">
+					<thead>
+					<tr class="noticeshead">
+						<td class="name">&nbsp;</td>
+						<td>Receive commit e-mails</td>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<input id="savenotifications" type="submit" value="save notifications" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+[test:enabled_git
+<script type="text/javascript">
+	addEvent($('ssh_key_help_source'), 'click', function() {
+		lightbox_show($('ssh_key_help_target'), $('ssh_key_help_close'));
+	});
+</script>
+]

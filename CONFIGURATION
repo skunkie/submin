@@ -1,0 +1,133 @@
+Configuration
+=============
+
+Most configuration can be set by using submin2-admin. For more information
+run 'submin2-admin /path/to/submin/env help'.
+
+
+Submin2-admin config set
+------------------------
+
+A list of submin2-admin 'config' options is given here, since submin2-admin
+does not have a complete list (if it's not set, it's not shown). The default
+values and examples are shown within quotes to clarify what is part of the
+value. Don't use the quotes when setting the value.
+
+For example, to set 'base_url_submin' to "/submin", use the following command:
+
+    submin2-admin /path/to/submin/env config set base_url_submin /submin
+
+
+Options:
+
+ * apache_server_info_url
+    Only set this when you are really sure what you are doing. This URL is
+    used when 'apachectl' (or variants) can not list the apache modules for
+    diagnostics purposes. You can find this list of modules in the Diagnostics
+    menu when logged in as an administrator, under Subversion checks.
+
+ * auth_type
+    The storage used for authentication and others. Currently, only "sql"
+    is supported.
+
+ * base_url_git
+    The base url after the hostname (see http_vhost). The default value is
+    "/git". Git support need to be enabled for this to work (see INSTALL).
+
+ * base_url_submin
+    The base url after the hostname (see http_vhost) used for submin itself.
+    The default value is "/submin".
+
+ * base_url_svn
+    The base url after the hostname (see http_vhost) used for subversion
+    access. The default value is "/svn".
+
+ * base_url_trac
+    The base url after the hostname (see http_vhost) user for Trac. This is
+    only used when trac support is enabled. The default value is '/trac'.
+
+ * commit_email_from
+    Commit emails are sent from this address.
+    Example: "Submin <submin@supermind.nl>"
+
+ * database_version
+    For internal use. Do not change.
+
+ * dir_bin
+    Deprecated.
+
+ * enabled_trac
+    Set to "yes" if Trac support is enabled (this enables e.g. options in the
+    web interface. Set to "no" if Trac support is not necessary.
+
+ * env_path
+    The PATH environment variable. This can be changed to find helper scripts.
+    Example: "/bin:/usr/bin:/usr/local/bin:/opt/local/bin"
+
+ * git_dir
+    The directory where git repositories are stored. If path start with a "/",
+    then the directory is absolute. If it does not start with a slash, it's
+    relative to the submin environment (default /var/lib/submin). If you do not
+    let submin handle it, you might get problems with permissions. The default
+    value of git_dir is: "git".
+
+ * git_ssh_host
+    The hostname to expose to the outside for git repositories.
+    Example: "git.example.org"
+
+ * git_ssh_host_internal
+    The hostname to use internally for git. This should end up in the same
+    account as when connecting to git_ssh_host. Defaults to: "localhost".
+
+ * git_ssh_port
+    The port to connect to for git. The same port is used for external as
+    internal use. Default: "22"
+
+ * git_user
+    The ssh-user used for git-access, both external as internal.
+    Default: "git"
+
+ * http_vhost
+    The hostname to use when the hostname can not be guessed (e.g. in e-mails).
+    If the scheme is not included, it is prepended with 'http://'. If you want
+    to run only on HTTPS, prepend 'https://' yourself.
+    Example: "https://example.org".
+
+ * session_salt
+    For internal use. Do not change.
+
+ * smtp_from
+    Submin e-mails (e.g. password resets) are sent from this address. Please
+    set this to a sane value. Default: "root@localhost"
+
+ * smtp_hostname
+    Hostname to connect to when sending e-mails. By default this is
+    "localhost". If Submin can not connect, it will try locally with a
+    'sendmail'-like binary.
+
+ * smtp_port
+    Port to connect to when sending e-mails. Default is 25. See also
+    smtp_hostname.
+
+ * smtp_username, smtp_password
+    Username and password used to connect to smtp_hostname on port smtp_port
+    when sending e-mails. See also smtp_hostname.
+
+ * svn_authz_file
+    The location of the svn authz file. If you are really sure you want to
+    change this, please regenerate apache config files, since it needs to
+    update the location as well (see INSTALL for instructions). For discussion
+    about absolute/relative paths, see 'git_dir'.
+    Default: "conf/authz"
+
+ * svn_dir
+    The directory where subversion repositories are stored. For more
+    information see discussion at 'git_dir'. The default is "svn".
+
+ * trac_dir
+    The directory where Trac repositories are stored. For more information see
+    discussion at 'git_dir'. The default is "trac".
+
+ * vcs_plugins
+    Which version control system plugins to load. Can be "svn", "git" or both.
+    Default: "git,svn"

@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>Scenarios</title>
+		<style type="text/css" media="screen">
+			table {
+				border-collapse: collapse;
+				margin-bottom: 2em;
+			}
+			td,th {
+				border: 1px solid #000;
+				padding: 0.2em;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<form action="" method="post">
+			[iter:sections
+				<table>
+					<tr>[iter:ival.heading <th>[ival]</th>]
+						[iter:browsers <th>[ival]</th>]
+					</tr>
+
+					[iter:ival.options <tr>
+						[iter:ival.texts <td>[ival]</td>]
+						[set:hash [val ival.hash]]
+						[iter:ival.flags
+						<td>
+							<input type="checkbox" name="[val hash]" value="[val iindex.__str__]" [test:ival checked="checked"]>
+						</td>]
+					</tr>]
+
+				</table>
+			]
+			<input type="submit" value="Save state" />
+		</form>
+		<div>
+		Notes:
+		<ul>
+		<li>(*1) If permissons present (or in collapsed subdirectory), directory should be marked.</li>
+		<li>(*2) both should work. If this was the first item, corresponding directory should not be marked before, but should be marked after addition.</li>
+		<li>(*3) both should work. If this was the last item, corresponding directory should be marked before, but not after.</li>
+		</ul>
+		</div>
+	</body>
+</html>

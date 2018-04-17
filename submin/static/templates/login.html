@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Language" content="en-us" />
+		<title>Submin [val SUBMIN_VERSION] - login</title>
+		<link rel="stylesheet" href="[val base_url]css/master.css">
+		<link rel="stylesheet" href="[val base_url]css/login.css">
+		<!--\[if lt IE 7\]>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
+		<!\[endif\]-->
+	</head>
+	<body onload="document.getElementById('username').focus();">
+		<div class="login">
+		<h1>Submin</h1>
+		<p>Please login:</p>
+		<form action="" method="post">
+			<ul>
+				<li><label for="id_username">Username:</label> <input id="username" class="rounded" type="text" name="username" /></li>
+				<li><label for="id_password">Password:</label> <input id="password" class="rounded" type="password" name="password" /></li>
+				<li><input type="submit" name="submit" value="Login" /></li>
+				<li><a href="[val base_url]password/">Forgot your password?</a></li>
+			</ul>
+		</form>
+		<div class="comment">submin [val SUBMIN_VERSION]: subversion and git web administration</div>
+		[test:msg <div class="error">[val msg]</div>]
+		[test:is_authenticated <div class="hint">Hello [val username], you are already logged in. Would you like to continue to <a href="[val base_url]">submin</a> or <a href="[val base_url]logout/">logout</a>?</div>]
+		</div>
+	</body>
+</html>

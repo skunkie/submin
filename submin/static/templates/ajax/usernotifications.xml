@@ -1,0 +1,7 @@
+<response>
+	<command name="listNotifications" success="True">
+		<notifications user="[val username]">
+			[iter:notifications <notification name="[ikey]" vcs="[ival.vcs]" enabled="[ival.enabled]"/>]
+		</notifications>
+	</command>
+</response>

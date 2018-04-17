@@ -1,0 +1,111 @@
+submin (2.2.2-1) testing; urgency=medium
+
+  * New release: 2.2.2
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Sat, 24 Sep 2016 17:49:30 +0200
+
+submin (2.2.1-1) testing; urgency=medium
+
+  * Bump debian revision: "It is conventional to restart the debian_revision
+    at 1 each time the upstream_version is increased.". We will use revision
+    0 for nightlies.
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Mon, 18 Aug 2014 21:17:51 +0200
+
+submin (2.2.1-0) testing; urgency=medium
+
+  * New release: 2.2.1
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Mon, 18 Aug 2014 20:47:38 +0200
+
+submin (2.2.0-0) testing; urgency=medium
+
+  * New release: 2.2.0
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Thu, 10 Jul 2014 19:24:08 +0200
+
+submin (2.1.2-1) testing; urgency=low
+
+  * Went from svn to git repository. Bump debian package version so apt
+    will see that next versions are newer (submin2_2.1.2-0-git-*.deb is
+    'older' than submin2_2.1.2-0-svn-*.deb, since 'g' < 's').
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Sun, 29 Dec 2013 18:18:57 +0000
+
+submin (2.1.2-0) testing; urgency=low
+
+  * New release: 2.1.2
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Sat, 27 Jul 2013 00:30:45 +0000
+
+submin (2.1.1-0) testing; urgency=low
+
+  * New release: 2.1.1
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Fri, 26 Jul 2013 20:16:34 +0000
+
+submin (2.1.0-1) testing; urgency=low
+
+  * New release: 2.1.0
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Mon, 24 Dec 2012 23:09:32 +0000
+
+submin (2.0.3-1) testing; urgency=low
+
+  * Fixed #270 (mailer.py.conf is not updated when notifications change)
+  * Fixed #259 (Sort repository list on absolute values)
+  * Fixed #269/#258 (svn: MERGE request failed/200 OK)
+  * Fixed #257 (Svn commit email script matches repositories incorrectly)
+  * Removed unnecessary calls (perfomance increase)
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Tue, 03 Jan 2012 20:21:36 +0100
+
+submin (2.0.2-1) testing; urgency=low
+
+  * made readline support optional (refs #265)
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Mon, 22 Aug 2011 00:36:46 +0200
+
+submin (2.0.1-1) testing; urgency=low
+
+  * Save session information in the database. Fixes #193
+  * Prevent accidental double slash to be interpreted as netloc (fixes #256)
+  * Implement absolute URI redirection (fixes #256)
+  * Add URL sanitizing (fixes #255)
+  * Used the wrong encoded variable, fixed (fixes #248)
+  * Added www for FreeBSD (closes #235)
+
+ -- Michiel Holtkamp <michiel@supermind.nl>  Sun, 21 Aug 2011 19:42:14 +0200
+
+submin (2.0-1) testing; urgency=low
+
+  * Preparation for version 2.0
+  * Simplify javascript (closes #136), html cleanup, css cleanup
+  * Other small bugfixes
+  * Fixed listing of repositories when permissions were incorrect (#143)
+  * Used libsvn in favor of pysvn/executing svn command-line tools
+  * Improved support for non-ASCII characters (refs #145)
+  * Improved support for non-ASCII characters in templates (#149)
+  * Give suggestions to fix permission problems.
+  * Sort subdirectories in repository trees
+  * Added mailer.py (#137)
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Sun, 19 Oct 2008 09:54:21 +0200
+
+submin (1.0-1) testing; urgency=low
+
+  * Changed the release to 1.0.
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Thu, 16 Oct 2008 05:08:10 +0200
+
+submin (0.99-1) testing; urgency=low
+
+  * started working on the 1.0 branch
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Wed, 28 Nov 2007 21:18:38 +0100
+
+submin (0.1-1) testing; urgency=low
+
+  * Initial release.
+
+ -- Michiel Holtkamp <submin@supermind.nl>  Thu, 04 Oct 2007 17:49:01 +0200

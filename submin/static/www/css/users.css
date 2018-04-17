@@ -1,0 +1,71 @@
+label {
+	width: 100px;
+	float: left;
+}
+
+li div.help {
+	display: block;
+	color: #9A9A9A;
+	padding-left: 100px;
+	width: 30em;
+	cursor: pointer;
+}
+
+code {
+	border: 1px solid #898989;
+	background: #DADADA;
+	padding: 0 2px;
+}
+
+code.block {
+	display: block;
+	white-space: pre;
+}
+
+#ssh_key_add_form {
+	clear: left;
+	margin-top: 2.5em;
+}
+
+#ssh_keys {
+	float: left;
+}
+
+#ssh_keys li {
+	clear: both;
+	padding-left: 1.5em;
+}
+
+#ssh_keys li a {
+	width: 200px;
+	float: left;
+}
+
+#ssh_key_add_link {
+	margin-left: 1.5em;
+}
+
+#ssh_keys li img {
+	float: left;
+	cursor: pointer;
+}
+
+tr.noticeshead {
+	font-weight: bold;
+}
+
+tr.noticeshead td.name {
+	width: 100px;
+}
+
+#content input.disabled {
+	cursor: help;
+}
+
+div.usershowhide.c_object {
+	padding-left: 1em;
+}
+
+#notifications {
+	padding-left: 1.5em;
+}

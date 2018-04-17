@@ -1,0 +1,13 @@
+#!/usr/bin/env python2
+"""Wrapper around git_multimail.py
+
+This wrapper is needed to dynamically fill in values without having to
+write git config for each push. This wrapper should stay as simple as
+possible because every change requires the user to take action.
+"""
+# To check if this hook is up-to-date
+HOOK_VERSION = [val hook_version]
+
+from submin.subminadmin.git import multimailhook
+multimailhook.run()
+

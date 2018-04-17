@@ -1,0 +1,84 @@
+To get more information on tickets (#nnn in text below), see the following URL:
+https://ssl.supermind.nl/collab/projects/submin/report/6
+
+Changes in 2.2.2:
+ - packaging according to dh_python (fixes #367)
+
+
+Changes in 2.2.1:
+ - Tags are no longer trac-synced (fixes #401)
+ - Version is now shown in installed Submin (fixes #387)
+ - Diagnostics: show disabled as such, not as warnings (fixes #398)
+ - Diagnostics: now also on the command line (submin2-admin)! (fixes #393)
+ - Diagnostics: crude 'send' email test (fixes #397)
+ - Submin2-admin 'initenv' improvements (fixes #355, #356)
+ - Added 'force authz export' command (fixes #380)
+ - Fix 'addicons' not displaying in Safari (non-ticket change)
+ - Fixes/diagnostics for when git_dir is outside submin env (fixes #408, #406)
+ - Support multiple SSH key types (fixes #385)
+ - Improved development server for faster testing
+ - Fixed SMTP Auth problem (fixes #409)
+ - IPv6 fixes: development server, generate 'hook ACL' for trac sync.
+ - Various text fixes (fixes #405, #407)
+ - Various code cleanups (fixes #378 and other non-ticket changes)
+ - Updated various Documentation
+
+Changes in 2.2.0:
+ - Hints to user to set Trac permissions (fixes #314)
+ - Option to disallow anonymous trac access (fixes #316)
+ - Login redirect bug fixes (fixes #334)
+ - Submin2-admin improvements (fixes #323, #336, #352, #363, #368, #369, #383)
+ - Make 'git init' more robust when adding a system user (fixes #324)
+ - More robust diagnostics (fixes #325, #326, #330, #331, #348, #349, #354,
+   #358, #359, #360, #371, #375, #390)
+ - uWSGI fixes (bind: Permission denied)
+ - Added configuration for all configuration options (see submin2-admin's
+   'config' command)
+ - Override 'From:' for svn commit email (like for git) (fixes #329)
+ - Allow scheme in configuration to force HTTPS (fixes #338)
+ - More robust (generated) hook handling (fixes #332)
+ - Improved git support, also trac-sync (fixes #341, #342, #376)
+ - Updated git_multimail.py
+ - Debian packages are now split up in multiple packages (fixes #343, #344)
+ - Improved (unit)testing
+ - Better modularity of git/svn modules (fixes #296, #362)
+ - Various interface improvements (fixes #334, #346, #347, #366, #373,
+   #374, #377, #384)
+ - Notifications can be saved in FF again (fixes #372)
+ - Code cleanup (e.g. #321, #322, #327)
+ - Improved internal template engine (error reporting, robustness)
+ - Improved documentation (e.g. #391)
+
+Changes in 2.1.2:
+ - Better uWSGI reloading
+ - Added email diagnostics
+ - submin2-admin fixes
+
+Changes in 2.1.1:
+ - Added NGINX/uWSGI support for the webui (you still need Apache for subversion).
+ - Password (re)set functionality is now easier: no need to check your mail multiple times
+ - Increased notification performance (sending, saving)
+ - Notifications/commit email improvements: check if user has read permission, instead of some weird 'allow' field
+ - Git commit email is handled by git-multimail (https://github.com/mhagger/git-multimail) license is compatible
+ - Git stability improvements (fixes #298, #302)
+ - Added Git admin command: hook updates
+ - Fixed python 2.6 compatibility: missing check_output (fixes #305, #315)
+ - Minor enhancements in the UI (hint to change password, CSS ellipsis, links to repositories, Javascript robustness, hide admin functionality for non-admins)
+ - Code cleanup and refactoring
+ - Other bugfixes (#307, #310, #311)
+
+Changes in 2.1.0:
+ - Apache config files are now generated separately (Trac, submin web UI, SVN and also CGI, WSGI, FCGI)
+ - Web UI: improved correctness, load time, performance and small design improvements.
+ - Added 'Diagnostics' page: check common misconfigurations.
+ - Fixed code that was checking if Trac support was enabled (fixes #293)
+ - Removed (partial) IE6 support.
+ - Added IP-address in password reset request, so you can see who is trying to reset your password.
+ - Session improvements (fixes #283, #286 and others)
+ - Unicode improvements (fixes #278 and others)
+ - Git support improvements (fixes #295, #275 and others)
+ - Added submin-quickstart binary, for quick testing
+ - Other minor bugfixes in submin2-admin (fixes #291 and others)
+ - Other minor bugfixes in submin web UI
+ - Other minor fixes in the tempting system
+ - Add more unit tests for regression testing
